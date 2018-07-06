@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Instagram</title>
+</head>
+<body>
+    <div style="margin-top: 40px">
+        <h1> Listar Fotos Instagram </h1>
+    </div>
+    <div id="instagram"></div>
+    <script>
+        var token = ''
+        fetch('https://api.instagram.com/v1/users/self/media/recent?access_token=' + token)
+            .then(function(response) { return response.json()})
+            .then(function(response) {
+                response.data.map(value => {
+                    try {
+                        var img = document.createElement('img')
+                        img.src = value.images.low_resolution.url
+                        img.style = 'margin-left: 15px; margin: 5px'
+                        var src = document.getElementById('instagram')
+                        src.appendChild(img)
+                    } catch (err) {
+                        console.log(err)
+                    }
+                    
+                })
+            })
+    </script>
+</body>
+</html>
